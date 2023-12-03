@@ -1,6 +1,6 @@
 {
   "name": "steam-start",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "dist/index.js",
   "type": "commonjs",
   "types": "dist/index.d.ts",
@@ -21,7 +21,7 @@
     "@waspyro/steam-mobile": "^1.0.3",
     "@waspyro/steam-session": "^0.3.6",
     "@waspyro/steam-web": "^0.0.9",
-    "persistorm": "^2.1.6",
+    "persistorm": "^2.1.7",
     "user-agents": "^1.1.42"
   },
   "repository": {
