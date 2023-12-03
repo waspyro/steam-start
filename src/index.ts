@@ -5,6 +5,8 @@ import UserAgent from "user-agents";
 import SteamWeb from "@waspyro/steam-web";
 import {RequestOpts} from "@waspyro/steam-session/dist/common/types";
 import {AtLeast} from "@waspyro/steam-web/dist/types";
+import {getStoreFromConfig} from "persistorm/dist/fromConfig";
+import {StoreConfig} from 'persistorm/dist/fromConfig'
 
 type StartOpts = {
   store: PersistormInstance
@@ -14,9 +16,7 @@ type StartOpts = {
   }
 }
 
-type CarryJar = ReturnType<SteamSession['cookies']['get']>
-
-export default async function Start({store, credentials, proxy} = {} as AtLeast<StartOpts, 'store'>) {
+export default async function Steam({store, credentials, proxy}: AtLeast<StartOpts, 'store'>) {
 
   if(!credentials) {
     const saved = await store.get('credentials') || []
@@ -46,7 +46,7 @@ export default async function Start({store, credentials, proxy} = {} as AtLeast<
   const client = await SteamSession.restore({
     refresher: mobile.Refresher,
     store: sessionsStore.col('client'),
-    env: oldEnv => oldEnv.meta.updated ? oldEnv : SteamSession.env.clientMacOS(),
+    env: oldEnv => oldEnv?.meta?.updated ? oldEnv : SteamSession.env.clientMacOS(),
   })
 
   const webProps = store.col('props')
@@ -56,7 +56,7 @@ export default async function Start({store, credentials, proxy} = {} as AtLeast<
 
   const defaultRequestLogger = (
     login: string, sessionType: string,
-    requestArgs: [URL, RequestOpts, CarryJar]
+    requestArgs: [URL, RequestOpts, any] //todo........
   ) => console.log('>', login, sessionType, requestArgs[0].toString())
 
   const useRequestLoggers = (logger = defaultRequestLogger) => {
@@ -69,8 +69,12 @@ export default async function Start({store, credentials, proxy} = {} as AtLeast<
 
 }
 
+export function StartWithStore(opts: StoreConfig & {login: string, proxy?: string}) {
+  return Steam({store: getStoreFromConfig().col(opts.login), proxy: opts.proxy})
+}
+
 const checkMobileEnv = (env) => {
-  if (!env.meta.updated) env = SteamSession.env.mobileIOS()
+  if (!env?.meta?.updated) env = SteamSession.env.mobileIOS()
   if (!env.meta.deviceid) {
     env.meta.deviceid = SteamMobile.randomDeviceID()
     env.meta.updated = Date.now()
@@ -79,7 +83,7 @@ const checkMobileEnv = (env) => {
 }
 
 const checkWebEnv = (env) => {
-  if(!env.meta.updated || !env.meta.viewport) {
+  if(!env?.meta?.updated || !env?.meta?.viewport) {
     const ua = new UserAgent({deviceCategory: 'desktop'})
     env = SteamSession.env.webBrowser(ua.toString())
     env.meta.viewport = {
