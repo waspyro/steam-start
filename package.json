@@ -1,6 +1,6 @@
 {
-  "name": "steam-start",
-  "version": "0.0.2",
+  "name": "@waspyro/steam-start",
+  "version": "0.0.3",
   "main": "dist/index.js",
   "type": "commonjs",
   "types": "dist/index.d.ts",
@@ -16,13 +16,13 @@
   "author": "waspyro",
   "license": "ISC",
   "dependencies": {
-    "@types/node": "^20.10.3",
+    "@types/node": "^20.10.5",
     "@types/user-agents": "^1.0.4",
-    "@waspyro/steam-mobile": "^1.0.3",
+    "@waspyro/steam-mobile": "^1.0.4",
     "@waspyro/steam-session": "^0.3.6",
-    "@waspyro/steam-web": "^0.0.9",
+    "@waspyro/steam-web": "^0.0.14",
     "persistorm": "^2.1.7",
-    "user-agents": "^1.1.42"
+    "user-agents": "^1.1.58"
   },
   "repository": {
     "type": "git",
