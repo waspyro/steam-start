@@ -20,7 +20,7 @@
     "@types/user-agents": "^1.0.4",
     "@waspyro/steam-mobile": "^1.0.4",
     "@waspyro/steam-session": "^0.3.6",
-    "@waspyro/steam-web": "^0.0.14",
+    "@waspyro/steam-web": "^0.0.15",
     "persistorm": "^2.1.7",
     "user-agents": "^1.1.58"
   },
