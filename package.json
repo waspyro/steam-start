@@ -16,13 +16,13 @@
   "author": "waspyro",
   "license": "ISC",
   "dependencies": {
-    "@types/node": "^20.10.5",
+    "@types/node": "^20.11.17",
     "@types/user-agents": "^1.0.4",
     "@waspyro/steam-mobile": "^1.0.4",
     "@waspyro/steam-session": "^0.3.6",
-    "@waspyro/steam-web": "^0.0.15",
+    "@waspyro/steam-web": "^0.0.16",
     "persistorm": "^2.1.7",
-    "user-agents": "^1.1.58"
+    "user-agents": "^1.1.111"
   },
   "repository": {
     "type": "git",
